@@ -1,19 +1,19 @@
- Application Instrumentation using Appdynamics
+ Application Instrumentation using AppDynamics
 ================================================================================
 
-Pre-Requisites.
+Prerequisites.
 ================================================================================
 
-- CloudFoundry Environment with Appdynamics Tile installed and configured with controller(s) information.
+- CloudFoundry Environment with Appdynamics Tile installed and configured with Controller(s) information.
+- The Cloud Foundry Command Line Interface (cf CLI).
+   See [Installing the cf CLI](https://docs.pivotal.io/pivotalcf/cf-cli/install-go-cli.html)
 - Sample Application. 
-
-
 
 
 To Use
 ================================================================================
 
-- Make sure appdynamics service is available by doing `cf marketplace` command 
+- Make sure the appdynamics service is available by using the `cf marketplace` command 
 
 ```
 pavan.krishna@OSXLTPKrishna:~/pcf-dash-generator$ cf marketplace
@@ -33,7 +33,7 @@ Creating service instance appd443 in org appdynamics-org / space dev as admin...
 OK
 ```
 
-Note that if we already have an instance for the plan of our choice, we donot have to create another one, we can reuse the same instance across multiple applications. 
+If you already have an instance for the plan of your choice, you do not have to create another one. You can reuse the same instance across multiple applications. 
 
 ```
 pavan.krishna@OSXLTPKrishna:~/pcf-dash-generator$ cf services
@@ -45,15 +45,15 @@ appd443   appdynamics   443Controller                          create succeeded
 
 
 
-- Edit manifest.yml to include the service instance we created so that the application binds to the instance. 
-Just add
+- Edit the manifest.yml file to include the service instance you created so that the application binds to the instance. 
+Add `appd443` to the services section:
 
 ```
   services:
     - appd443
 ```
 
-so `manifest.yml` will look like
+The `manifest.yml` file will resemble:
 
 ```
 ---
@@ -72,4 +72,4 @@ applications:
 pavan.krishna@OSXLTPKrishna:~/pcf-dash-generator$ cf push 
 ```
 
-Once it is pushed, you can generate the traffic and you will notice the application getting instrumented on Appdynamics Controller.  
+Once it is pushed, you can generate traffic and will notice the application getting instrumented on AppDynamics Controller.  
